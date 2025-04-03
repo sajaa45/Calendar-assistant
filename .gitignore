@@ -2,3 +2,4 @@
 "backend/.env" 
 "backend/app/.env" 
 "backend/app/client_secret.json" 
+"backend/app/services/google_calendar.py"

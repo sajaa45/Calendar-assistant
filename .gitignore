@@ -1,4 +1,4 @@
 ".env" 
 "backend/.env" 
 "backend/app/.env" 
-"backend/client_secret.json" 
+"backend/app/client_secret.json" 

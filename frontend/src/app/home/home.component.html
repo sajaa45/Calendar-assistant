@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="header">
+  <h1>Smart Schedule Planner</h1>
+</div>
+  <!-- Event Input -->
+  <div class="input-group">
+    <input [(ngModel)]="newEvent" placeholder="Add event (e.g. Meeting at 10am)" (keyup.enter)="addEvent(newEvent); newEvent = ''">
+    <button (click)="addEvent(newEvent); newEvent = ''">Add</button>
+  </div>
+  
+  <!-- Events List -->
+  <div class="events-list">
+    <div *ngFor="let event of events; let i = index" class="event-item">
+      <span>{{ event }}</span>
+      <button (click)="removeEvent(i)" aria-label="Remove event">×</button>
+    </div>
+  </div>
+  
+  <!-- Time Range -->
+  <div class="time-input">
+    <label for="fromTime">Available Time:</label>
+    <select id="fromTime" [(ngModel)]="freeTimeFrom">
+      <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+    </select>
+
+    <label for="toTime">To:</label>
+    <select id="toTime" [(ngModel)]="freeTimeTo">
+      <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+    </select>
+  </div>
+  
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button (click)="generateSchedule()" [disabled]="isLoading">
+      <ng-container *ngIf="isLoading; else buttonText">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </ng-container>
+      <ng-template #buttonText>Generate Schedule</ng-template>
+    </button>
+    <button 
+  (click)="connectGoogle()" 
+  [class.connected]="isGoogleConnected"
+  [disabled]="isGoogleConnected">
+  {{ isGoogleConnected ? '✓ Google Connected' : 'Connect Google Calendar' }}
+</button>
+  
+  <button 
+    (click)="syncWithGoogle()" 
+    [disabled]=" !scheduleResult || syncCompleted"
+    [class.connected]="syncCompleted">
+    {{ syncCompleted ? '✓ Added to Calendar' : 'Sync to Calendar' }}
+  </button>
+</div>
+  
+  <!-- Schedule Results -->
+  <div *ngIf="scheduleResult" class="schedule-result">
+    <h3>Your Suggested Schedule:</h3>
+    <pre>{{ scheduleResult.schedule | json }}</pre>
+  </div>
+</div>
+

@@ -1,0 +1,14 @@
+fastapi 
+uvicorn 
+openai 
+torch
+google-auth 
+google-auth-oauthlib 
+google-auth-httplib2 
+google-api-python-client 
+sqlalchemy
+google-auth 
+google-auth-oauthlib 
+google-auth-httplib2 
+google-api-python-client
+python-multipart

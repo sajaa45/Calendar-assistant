@@ -1,3 +1,3 @@
 backend/.env
-backend/app/services/google_calendar.py
+backend/app/services/client_secret.json
 *.pyc
